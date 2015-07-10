@@ -196,12 +196,12 @@
 		
 		this.image = document.createElement('div');
 		this.image.setAttribute('class','heroSprite');
-		this.image.style.border = '1px solid red';
+		// this.image.style.border = '1px solid red';
 		this.image.style.position = 'absolute';
 
 		this.element  = document.createElement('div');
 		// //this.element.style.overflow ='hidden'
-		this.element.style.border = '1px solid blue';
+		// this.element.style.border = '1px solid blue';
 		// this.element.style.background = 'blue';
 		this.element.style.position = 'absolute';
 
@@ -222,17 +222,6 @@
 			that.element.style.width = that.width + 'px';
 			that.element.style.height = that.height + 'px';
 		};
-
-		// this.stopSprite = function(sprite){
-		// 	console.log(sprite);
-		// 	var stop = function ()
-		// 	{
-		// 		window.cancelAnimationFrame(sprite.animate);
-		// 	};
-
-		// 	setTimeout(stop,600);
-		// };
-
 
 		// Jump Duck function
 		this.jump = function(sprite){
@@ -267,9 +256,11 @@
 			that.image.style.marginTop = '-2px';
 			// animation = setInterval(spriteSheet.animate,100);
 			that.y = gameProps.height - that.height - 45;
-			heroAction = new HeroSheet('heroSprite',330,40,1,9,'run');
-			heroAction.animate();
-
+			if(!gameOver)
+			{
+				heroAction = new HeroSheet('heroSprite',330,40,1,9,'run');
+				heroAction.animate();
+			}
 			// heroRun.animate();
 		};	
 
@@ -359,6 +350,11 @@
 			src = 'heroShoot.png';
 		}
 
+		else if(flag ==='death')
+		{
+			src = 'heroDeath.png';
+		}
+
 		console.log(src);
 
 		for(var i = 0; i < this.element.length; i++)
@@ -386,10 +382,6 @@
 							that.y = that.y - that.dy;
 						}
 					}
-
-					// setTimeout(function() {
-					// 	       requestAnimationFrame(that.animate);
-					// 	    }, 1000 / fps);
 
 					that.x = that.x - that.dx;
 
@@ -424,14 +416,7 @@
 			var alien = new Alien();
 			alien.x = 540;
 			var position =  Math.floor((Math.random() * 80) + 38);
-		 	// alienPosition = Math.floor((Math.random() * 10) + 0);
-
-		 	// console.log(alienPosition);
-		 	// if(alienPosition <3)
 		 	alien.y = gameProps.height - hero.height - position;
-			console.log(alien.y);
-
-
 			aliens.push(alien);
 			gameDiv.appendChild(alien.element);
 		};
@@ -454,7 +439,7 @@
 				if(event.keyCode === 38){
 					if(hero.y === gameProps.height - hero.height - 45)
 					{
-						heroAction = new HeroSheet('heroSprite',312,48,1,9,'jump');//call new spritesheet for jump action
+						var heroAction = new HeroSheet('heroSprite',312,48,1,9,'jump');//call new spritesheet for jump action
 						hero.jump();
 						heroAction.animate();
 					}
@@ -468,7 +453,7 @@
 						{
 								createBullet();
 								shooting = true;
-								heroAction = new HeroSheet('heroSprite',617,45,1,10,'shoot') ;
+								var heroAction = new HeroSheet('heroSprite',617,45,1,10,'shoot') ;
 								hero.shoot();
 								heroAction.animate();
 						}
@@ -477,7 +462,7 @@
 
 				else if(event.keyCode === 40){
 
-					heroAction = new HeroSheet('heroSprite',330,40,1,9,'slide');//call new spritesheet for jump action
+					var heroAction = new HeroSheet('heroSprite',330,40,1,9,'slide');//call new spritesheet for jump action
 					hero.slide();
 					heroAction.animate();
 				}
@@ -487,12 +472,13 @@
 
 		window.onkeyup = function(event){
 			// alert(event.keyCode);
-			if(event.keyCode === 65)
-			{
-				shooting = false;
-				hero.gravity();
+			if(!gameOver){
+				if(event.keyCode === 65)
+				{
+					shooting = false;
+					hero.gravity();
+				}
 			}
-
 		};
 
 	//Game Setup
@@ -520,7 +506,7 @@
 				background.updateFrame();
 				hero.updateFrame();
 
-				if (loopCounter % 110 === 0) {
+				if (loopCounter % 120 === 0) {
 					createAlien();	
 					var alienSheet = new AlienSheet('alien.png','alienSprite',192,23,1,6,5);
 					alienSheet.animate();
@@ -536,7 +522,7 @@
 						gameDiv.removeChild(alien.element);
 					}
 
-					if(alien.y < 0 || alien.y > 149)
+					if(alien.y < 0 || alien.y > 150)
 					{
 						alien.dy = alien.dy * (-1);
 					}
@@ -564,20 +550,16 @@
 
 			else
 			{
-				//call new spritesheet for duck action
-				var spriteDeath = new SpriteSheet('heroDeath.png','heroSprite',620,40,1,16,20);
+				var spriteDeath = new HeroSheet('heroSprite',620,40,1,16,'death');
 				
 				//Run death spritesheet
-				(function startDeath() 
-				{
-		    		heroAnimation = setInterval(spriteDeath.animate,100);
-				})();
-
-				function stopHero(){
-					clearInterval(heroAnimation);
+				var deathAnimation = function(){ 
+				setInterval(spriteDeath.animate,10);
 				};
+				setTimeout(deathAnimation,100);
+				alert("Game Over!!!");
+				//call new spritesheet for duck action
 
-				setTimeout(stopHero,1600);
 			}
 		};
 		
@@ -586,7 +568,7 @@
 
 		heroAction = new HeroSheet('heroSprite',330,40,1,9,'run');
 
-		setInterval(heroAction.animate,100);
+		setInterval(heroAction.animate,50);
 	};
 
 	window.LineRunner = LineRunner;
