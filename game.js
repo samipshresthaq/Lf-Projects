@@ -556,7 +556,7 @@
 					bullet.render();
 				}	
 
-				// collisionDetection.detect(aliens,hero);
+				collisionDetection.detect(aliens,hero);
 				collisionDetectionBullet.detect(aliens,bullets,gameDiv);
 
 				requestAnimationFrame(gameLoop);
