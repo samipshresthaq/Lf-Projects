@@ -92,7 +92,7 @@
 		this.element  = document.createElement('div');
 		this.element.style.width = '50000px';
 		this.element.style.height = '224px';
-		this.element.style.background = 'url(background.png) repeat-x';
+		this.element.style.background = 'url(images/background.png) repeat-x';
 		
 		var marginLeft = 0;
 		
@@ -130,7 +130,7 @@
 			that.bullet.style.top = that.y + "px";
 			// that.bullet.style.border = "1px solid white";
 			// that.bullet.style.left = "200px";
-			that.bullet.style.background = "url('bullet.png') no-repeat";
+			that.bullet.style.background = "url(images/bullet.png) no-repeat";
 			that.bullet.style.position = "absolute";
 			gameDiv.appendChild(that.bullet);
 
@@ -227,7 +227,7 @@
 			that.hero.style.width = 35 + "px";
 			that.hero.style.height = 40 +"px";
 			this.hero.style.position = 'absolute';
-			that.hero.style.background = 'url(' + src + ') no-repeat';
+			that.hero.style.background = 'url(images/' + src + ') no-repeat';
 
 			this.element  = document.createElement('div');
 			// //this.element.style.overflow ='hidden'
@@ -269,7 +269,7 @@
 			that.hero.style.height = 48 +"px";
 
 			var src = "heroJump.png";
-			that.hero.style.background = 'url(' + src + ') no-repeat';
+			that.hero.style.background = 'url(images/' + src + ') no-repeat';
 			//console.log("jump");
 			if(!gameOver)
 				setTimeout(that.restoreHeroPosition, 540);
@@ -290,7 +290,7 @@
 			that.hero.style.width = 38 + "px";
 
 			var src = "heroSlide.png";
-			that.hero.style.background = 'url(' + src + ') no-repeat';
+			that.hero.style.background = 'url(images/' + src + ') no-repeat';
 
 			if(!gameOver)
 				setTimeout(that.restoreHeroPosition, 600);
@@ -307,7 +307,7 @@
 			that.hero.style.width = that.imageWidth + "px";
 
 			var src = "heroShoot.png";
-			that.hero.style.background = 'url(' + src + ') no-repeat';
+			that.hero.style.background = 'url(images/' + src + ') no-repeat';
 
 			if(!gameOver)
 				setTimeout(that.restoreHeroPosition, 460);
@@ -324,7 +324,7 @@
 			that.hero.style.width = that.imageWidth + "px";
 
 			var src = "heroDeath.png";
-			that.hero.style.background = 'url(' + src + ') no-repeat';
+			that.hero.style.background = 'url(images/' + src + ') no-repeat';
 
 			// setTimeout(that.restoreHeroPosition, 460);
 		}
@@ -348,7 +348,7 @@
 			that.imageWidth = 36;
 
 			src = "hero.png";
-			that.hero.style.background = 'url(' + src + ') no-repeat';
+			that.hero.style.background = 'url(images/' + src + ') no-repeat';
 			
 			that.x = 0;
 		};
@@ -371,7 +371,7 @@
 			this.canvas.style.width = this.dx + 'px';
 			this.canvas.style.height = this.dy + 'px';
 
-			this.canvas.style.background = 'url(' + src + ') no-repeat';
+			this.canvas.style.background = 'url(images/' + src + ') no-repeat';
 
 			this.animate = function(){
 				
@@ -417,7 +417,7 @@
 		this.canvas.style.height = this.dy + 'px';
 		this.canvas.style.position = 'absolute';
 
-		this.canvas.style.background = 'url('+ src +') no-repeat';
+		this.canvas.style.background = 'url(images/'+ src +') no-repeat';
 
 		this.move = function(){
 			if(that.x === -((column-1) * that.dx))
@@ -626,13 +626,12 @@
 
 			else
 			{
-				// var deathSprite = function(){
-					hero.death();
-					var deathAnimation = setInterval(hero.moveHero,80);
-					var stopAnimation = function(){
-						clearInterval(deathAnimation);
-						gameRetry();
-					}
+				hero.death();
+				var deathAnimation = setInterval(hero.moveHero,80);
+				var stopAnimation = function(){
+					clearInterval(deathAnimation);
+					gameRetry();
+				}
 
 					setTimeout(stopAnimation,1280);
 				// //console.log(gameDiv.childNodes.length);
@@ -771,10 +770,10 @@
 
 			function loadgame()
 			{
-			gameDiv.removeChild(loading);
-			gameDiv.removeChild(loadingText);
-			gameOver = false;
-			metalContra.init();
+				gameDiv.removeChild(loading);
+				gameDiv.removeChild(loadingText);
+				gameOver = false;
+				metalContra.init();
 			}
 			setTimeout(loadgame,1500);
 		}
