@@ -9,12 +9,35 @@
 		padding: 0px;
 		margin: 0px;
 	}
+
+	@font-face {
+	    font-family: myFont;
+	    src: url(28_Days_Later.ttf);
+	}
+
+	#game
+	{
+		font-family: myFont;
+	}
+
+	a
+	{
+		text-decoration: none;
+		color: #e13c03;
+	}
+
+	a:hover
+	{
+		/*margin-left: 5px;*/
+		 text-shadow: 1px 1px 1px #faa707;	
+	}
 	</style>
 	<div id="game"></div>
     
 	<script type="text/javascript" src="game.js"></script>
     <script>
-	var lr = new LineRunner(document.getElementById('game'));
+	var main = new Menu(document.getElementById('game'));
+	main.mainMenu();
 	</script>
 </body>
 </html>
