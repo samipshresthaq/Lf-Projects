@@ -12,4 +12,4 @@
 
 # Have Fun
 
-[Metal Contra] (http://samipshresthaq.github.io/Lf-Projects/)
+Play Link [Metal Contra] (http://samipshresthaq.github.io/Lf-Projects/)
