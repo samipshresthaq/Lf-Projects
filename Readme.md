@@ -10,4 +10,6 @@
 	Concept from Metal Slug
 	Sprite Resources: https://www.spriters-resource.com/arcade/ms3/
 
-Have Fun
+# Have Fun
+
+[Metal Contra] (http://samipshresthaq.github.io/Lf-Projects/)
